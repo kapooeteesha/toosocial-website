@@ -1,0 +1,12 @@
+TooSocial Website — GitHub Pages
+
+UPLOAD (desktop recommended):
+1. Open https://github.com/kapooeteesha/toosocial-website
+2. Click "Add file" > "Upload files".
+3. Upload the index.html file INSIDE this ZIP (not the ZIP itself).
+4. Click "Commit changes".
+5. Open Settings > Pages and select Deploy from a branch > main > /(root) > Save.
+6. After GitHub finishes deploying, open https://kapooeteesha.github.io/toosocial-website/
+
+This site is a single-file static HTML page with embedded styling, scripts, and images.
+You may keep these instructions locally and upload only index.html.
