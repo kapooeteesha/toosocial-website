@@ -20,9 +20,90 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 [hidden]{display:none!important}
+
+/* === TooSocial / Motion Edition: refined progressive enhancements === */
+:root { --motion-ease:cubic-bezier(.2,.72,.22,1); }
+.site-header {
+  position:sticky; top:0;
+  background:rgba(255,255,255,.93);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  transition:box-shadow .3s ease,background-color .3s ease;
+}
+.site-header.is-scrolled {box-shadow:0 12px 32px rgba(45,29,64,.075);background:rgba(255,255,255,.97)}
+.scroll-progress {position:fixed;left:0;top:0;height:3px;width:0%;z-index:1000;
+  background:linear-gradient(90deg,#bea0ec 0%,#7750af 48%,#d7b1df 100%);
+  box-shadow:0 0 13px rgba(154,108,210,.25);pointer-events:none;transition:width 90ms linear}
+.primary-nav a{position:relative}
+.primary-nav a::after{content:'';position:absolute;left:0;bottom:-7px;width:0;height:2px;background:#8760ad;border-radius:20px;transition:width .28s var(--motion-ease)}
+.primary-nav a:hover::after,.primary-nav a.nav-active::after{width:100%}
+.hero{--wave-drift:0px}
+.hero-wave{transform:translate3d(0,var(--wave-drift),0) scale(1.035);transform-origin:center bottom;
+  animation:wave-float 14s ease-in-out infinite,wave-shimmer 9s ease-in-out infinite alternate;will-change:transform,filter}
+@keyframes wave-float{0%,100%{transform:translate3d(-.3%,var(--wave-drift,0px),0) scale(1.035)}50%{transform:translate3d(.3%,calc(var(--wave-drift,0px) - 8px),0) scale(1.045)}}
+@keyframes wave-shimmer{0%{filter:saturate(.93) brightness(1)}100%{filter:saturate(1.12) brightness(1.045)}}
+.hero-scroll-note span:last-child{display:inline-block;animation:down-cue 1.9s ease-in-out infinite}
+@keyframes down-cue{0%,100%{transform:translateY(-2px);opacity:.55}50%{transform:translateY(5px);opacity:1}}
+.hero .eyebrow{animation:hero-enter .65s .08s both var(--motion-ease)}
+.hero h1{animation:hero-enter .9s .18s both var(--motion-ease)}
+.hero-subtitle{animation:hero-enter .85s .3s both var(--motion-ease)}
+.hero-actions{animation:hero-enter .85s .41s both var(--motion-ease)}
+@keyframes hero-enter{from{opacity:0;transform:translateY(23px)}to{opacity:1;transform:translateY(0)}}
+/* Elements reveal as users explore. No JS or reduced-motion -> always visible. */
+.motion-enhanced .ts-reveal{opacity:0;transform:translate3d(0,25px,0);
+  transition:opacity .78s var(--motion-ease),transform .78s var(--motion-ease);
+  transition-delay:var(--reveal-delay,0ms)}
+.motion-enhanced .ts-reveal.ts-visible{opacity:1;transform:translate3d(0,0,0)}
+.work-card{--tilt-x:0deg;--tilt-y:0deg;--lift:0px;
+  transform:perspective(1100px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition:transform .35s var(--motion-ease),box-shadow .4s ease}
+.work-card:hover{--lift:-7px;transform:perspective(1100px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))}
+.work-card::after{content:'';pointer-events:none;position:absolute;inset:0;
+  background:radial-gradient(400px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(255,255,255,.34),transparent 65%);
+  opacity:0;transition:opacity .4s;z-index:1}
+.work-card:hover::after{opacity:1}
+.work-round-arrow{transition:transform .3s var(--motion-ease),background .3s}
+.work-card:hover .work-round-arrow{transform:translate(3px,-3px) rotate(8deg)}
+.welnis-art .art-orbit-one{animation:orbit-soft 15s ease-in-out infinite alternate}
+.welnis-art .art-orbit-two{animation:orbit-soft-alt 18s ease-in-out infinite alternate}
+.queen-art .queen-oval{animation:queen-sway 10s ease-in-out infinite alternate}
+.art-mini-tag{animation:tag-float 5s ease-in-out infinite}
+@keyframes tag-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes orbit-soft{from{transform:rotate(-27deg) translateX(-6px)}to{transform:rotate(-18deg) translateX(11px)}}
+@keyframes orbit-soft-alt{from{transform:rotate(-29deg) translateX(4px)}to{transform:rotate(-38deg) translateX(-9px)}}
+@keyframes queen-sway{from{transform:rotate(-14deg) translateY(2px)}to{transform:rotate(-8deg) translateY(-10px)}}
+.logo-slot{transition:transform .35s var(--motion-ease),box-shadow .35s ease,border-color .35s}
+.logo-slot:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(75,55,94,.10);border-color:#e1d6f1}
+.logo-slot img{transition:transform .45s var(--motion-ease),filter .4s ease}
+.logo-slot:hover img{transform:scale(1.07);filter:saturate(1.1)}
+.service-card{transition:transform .34s var(--motion-ease),box-shadow .34s ease}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 17px 37px rgba(58,40,75,.075)}
+.service-card[open]{box-shadow:0 12px 30px rgba(70,51,86,.085)}
+.service-card[open] .service-detail{animation:service-slide .38s var(--motion-ease) both}
+@keyframes service-slide{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}
+.button-dark{position:relative;overflow:hidden;isolation:isolate}
+.button-dark::after{content:'';pointer-events:none;position:absolute;inset:-35% -70%;width:45%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent);
+  transform:translateX(-300%) skewX(-22deg);transition:transform .75s ease}
+.button-dark:hover::after{transform:translateX(650%) skewX(-22deg)}
+.project-gallery .gallery-slot,.workflow-step{transition:transform .35s var(--motion-ease),box-shadow .35s}
+.gallery-slot:hover,.workflow-step:hover{transform:translateY(-4px);box-shadow:0 13px 29px rgba(60,41,85,.065)}
+main[data-view]:not([hidden]){animation:view-enter .53s var(--motion-ease) both}
+@keyframes view-enter{from{opacity:.35;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:650px){.hero-wave{animation-duration:11s}.work-card{transform:none!important}.scroll-progress{height:2px}}
+@media(prefers-reduced-motion:reduce){
+  .hero-wave,.hero .eyebrow,.hero h1,.hero-subtitle,.hero-actions,.hero-scroll-note span:last-child,
+  .welnis-art .art-orbit-one,.welnis-art .art-orbit-two,.queen-art .queen-oval,.art-mini-tag,
+  main[data-view]:not([hidden]),.service-card[open] .service-detail {animation:none!important}
+  .motion-enhanced .ts-reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .work-card,.work-card:hover,.logo-slot,.logo-slot:hover,.service-card,.service-card:hover{transform:none!important}
+  .button-dark::after{display:none}
+}
+@media print{.motion-enhanced .ts-reveal{opacity:1!important;transform:none!important}.scroll-progress{display:none}}
+
 </style></head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"></div>
 <header class="site-header" id="top">
 <div class="container header-inner">
 <a aria-label="TooSocial home" class="brand" href="#home"><span class="brand-too">Too</span><span class="brand-social">Social</span></a>
@@ -166,5 +247,103 @@
   window.addEventListener('DOMContentLoaded',render);
   render();
 })();
+
+/* TooSocial Motion Edition — respects device capabilities and accessibility settings. */
+(() => {
+  const doc = document.documentElement;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const header = document.querySelector('.site-header');
+  const progress = document.querySelector('.scroll-progress');
+  const hero = document.querySelector('.hero');
+  const navLinks = [...document.querySelectorAll('.primary-nav a[href^="#"]')];
+  let rafPending = false;
+
+  function paintScroll() {
+    const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const ratio = max ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    if (progress) progress.style.width = `${(ratio * 100).toFixed(2)}%`;
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 12);
+    if (hero && !prefersReduced && !hero.closest('[hidden]')) {
+      const rect = hero.getBoundingClientRect();
+      const shift = Math.min(26, Math.max(0, -rect.top * .085));
+      hero.style.setProperty('--wave-drift', `${shift.toFixed(1)}px`);
+    }
+    rafPending = false;
+  }
+  function schedulePaint() { if (!rafPending) { rafPending = true; requestAnimationFrame(paintScroll); } }
+  window.addEventListener('scroll', schedulePaint, {passive:true});
+  window.addEventListener('resize', schedulePaint, {passive:true});
+  window.addEventListener('hashchange', schedulePaint);
+  paintScroll();
+
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const candidates = document.querySelectorAll(
+      '.section-topline, .section-heading, .logo-category, .work-card, .service-card, ' +
+      '.approach-steps > div, .contact-inner, .project-hero-grid, .case-content-grid, ' +
+      '.case-workflow > div, .project-gallery > div'
+    );
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('ts-visible');
+          observerInstance.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.08, rootMargin:'0px 0px -26px 0px'});
+    [...candidates].forEach((el, i) => {
+      el.classList.add('ts-reveal');
+      const indexWithinGroup = Array.prototype.indexOf.call(el.parentElement.children, el);
+      el.style.setProperty('--reveal-delay', `${Math.min(3, indexWithinGroup % 4) * 85}ms`);
+      observer.observe(el);
+    });
+    doc.classList.add('motion-enhanced');
+  }
+
+  if (!prefersReduced && finePointer) {
+    document.querySelectorAll('.work-card').forEach(card => {
+      let frame = 0;
+      let point = null;
+      function updateTilt() {
+        frame = 0;
+        if (!point) return;
+        const rect = card.getBoundingClientRect();
+        const x = Math.min(1, Math.max(0, (point.x - rect.left) / rect.width));
+        const y = Math.min(1, Math.max(0, (point.y - rect.top) / rect.height));
+        card.style.setProperty('--tilt-x', `${((0.5 - y) * 3.7).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${((x - 0.5) * 3.7).toFixed(2)}deg`);
+        card.style.setProperty('--glow-x', `${(x * 100).toFixed(1)}%`);
+        card.style.setProperty('--glow-y', `${(y * 100).toFixed(1)}%`);
+      }
+      card.addEventListener('pointermove', e => {
+        point = {x:e.clientX, y:e.clientY};
+        if (!frame) frame = requestAnimationFrame(updateTilt);
+      }, {passive:true});
+      card.addEventListener('pointerleave', () => {
+        if (frame) cancelAnimationFrame(frame);
+        frame=0;point=null;
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+        card.style.setProperty('--glow-x', '50%');
+        card.style.setProperty('--glow-y', '50%');
+      });
+    });
+  }
+
+  // Highlight the navigation section while visitors scroll the homepage.
+  if ('IntersectionObserver' in window) {
+    const sections = ['work','services','approach','contact']
+      .map(id => document.getElementById(id)).filter(Boolean);
+    const navObserver = new IntersectionObserver(entries => {
+      if (document.querySelector('main[data-view="home"]')?.hidden) return;
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(a => a.classList.toggle('nav-active', a.getAttribute('href') === '#' + entry.target.id));
+      });
+    }, {rootMargin:'-25% 0px -55% 0px'});
+    sections.forEach(s => navObserver.observe(s));
+  }
+})();
+
 </script></body>
 </html>
